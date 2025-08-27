@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffb6f2, #9fd8ff);
+            position: relative;
+        }
+
+        /* Container for the central card and button */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* Birthday text styling */
+        .birthday-text {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            font-size: 5em;
+            font-family: 'Georgia', serif;
+            color: white;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.1em;
+            text-align: center;
+            line-height: 1.2;
+            z-index: 20;
+            text-transform: uppercase;
+        }
+
+        /* Main birthday collage (center) */
+        .card {
+            max-width: 420px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        /* Floating photos (p2-p12) */
+        .floating {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            z-index: 15;
+            transition: transform 4s ease-in-out;
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+            border-radius: 50%;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(120vh) rotate(720deg);
+                opacity: 0.5;
+            }
+        }
+
+        /* "Wish or Gift" Button styling */
+        .gift-button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ff69b4; /* Hot pink */
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            text-decoration: none;
+            text-align: center;
+            z-index: 20;
+        }
+
+        .gift-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-text">
+        <span>HAPPY</span><br>
+        <span>BIRTHDAY</span>
+    </div>
+
+    <div class="main-content">
+        <img src="p1.png" alt="Birthday Collage" class="card">
+        <a href="np3.html" class="gift-button">Wish or Gift</a>
+    </div>
+
+    <img src="p2.jpg" class="floating">
+    <img src="p3.jpg" class="floating">
+    <img src="p4.jpg" class="floating">
+    <img src="p5.jpg" class="floating">
+    <img src="p6.jpg" class="floating">
+    <img src="p7.jpg" class="floating">
+    <img src="p8.jpg" class="floating">
+    <img src="p9.jpg" class="floating">
+    <img src="p10.jpg" class="floating">
+    <img src="p11.jpg" class="floating">
+    <img src="p12.jpg" class="floating">
+
+    <script>
+        const floats = document.querySelectorAll('.floating');
+        const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
+
+        function randomMove(img) {
+            let x = Math.random() * (window.innerWidth - 120);
+            let y = Math.random() * (window.innerHeight - 120);
+            let r = Math.random() * 360;
+            img.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`;
+        }
+
+        // first placement
+        floats.forEach(img => randomMove(img));
+
+        // move every 4s
+        setInterval(() => {
+            floats.forEach(img => randomMove(img));
+        }, 4000);
+
+        // Confetti generation
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = `${Math.random() * 100}vw`;
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+
+        // Create confetti every 100ms
+        setInterval(createConfetti, 100);
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wish or Gift</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ffb6f2, #9fd8ff);
+        font-family: 'Georgia', serif;
+    }
+    .page-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+    }
+    .message {
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(5px);
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    .message h1 {
+        color: #ff69b4;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+    .message textarea {
+        width: 300px;
+        height: 150px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1em;
+        resize: none;
+        margin-bottom: 15px;
+    }
+    .message button {
+        padding: 10px 20px;
+        background-color: #ff69b4;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .message button:hover {
+        transform: scale(1.05);
+    }
+    .side-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+    }
+    .side-image:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
+</style>
+</head>
+<body>
+
+<div class="page-content">
+    <img src="p13.jpg" alt="Photo 13" class="side-image">
+
+    <div class="message">
+        <h1>Send a greeting message!</h1>
+        <p>Please write a message for my special day!</p>
+
+        <!-- Form -->
+        <form id="wishForm">
+            <textarea name="message" placeholder="Type your message here..."></textarea>
+            <br>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <img src="p14.jpg" alt="Photo 14" class="side-image">
+</div>
+
+<!-- JavaScript to submit form and redirect -->
+<script>
+document.getElementById('wishForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // stop default submission
+
+    const message = this.message.value;
+    const url = "https://script.google.com/macros/s/AKfycbyxvEH2Y-SRtNHJ7cF0Ltxmr9JJK4G4gLJX9HVJx432D0EHSmCCsd02rgkLsBzTn6vqHw/exec";
+
+    fetch(url, {
+        method: "POST",
+        body: new URLSearchParams({ message })
+    })
+    .then(() => {
+        // Redirect to dt.html after successful submission
+        window.location.href = "dt.html";
+    })
+    .catch(err => {
+        alert("Error sending message. Please try again.");
+        console.error(err);
+    });
+});
+</script>
+
+</body>
+</html>
